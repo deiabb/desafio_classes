@@ -1,24 +1,15 @@
 class Pipoca {
-    constructor(nome, sabor, peso, preco) {
-        this.nome = nome;
+    constructor(sabor, peso, preco) {
         this.sabor = sabor;
         this.peso = peso;
         this.preco = preco;
     }
 }
 
-const pipocaCaramelizadaP = new Pipoca ("Pipoca Caramelizada Pequena", "Doce caramelizada", 300, 20.50);
-
-const pipocaCaramelizadaM = new Pipoca ("Pipoca Caramelizada Média", "Doce caramelizada", 600, 35.00);
-
-const pipocaCaramelizadaG = new Pipoca ("Pipoca Caramelizada Grande", "Doce caramelizada", 900, 43.40);
-
-const pipocaBaconP = new Pipoca ("Pipoca com Bacon Pequena", "Salgada com bacon", 300, 25.50);
-
-const pipocaBaconM = new Pipoca ("Pipoca com Bacon Pequena", "Salgada com bacon", 600, 40.50);
-
-const pipocaBaconG = new Pipoca ("Pipoca com Bacon Grande", "Salgada com bacon", 900, 48.50);
-
+const pipocaCaramelizada = new Pipoca ("Pipoca Doce Caramelizada", 50, 10.50);
+const pipocaAmanteigada = new Pipoca ("Pipoca Salgada Amanteigada", 50, 8.20);
+const pipocaBacon = new Pipoca ("Pipoca Salgada com Bacon", 50, 12.50);
+const pipocaNinho = new Pipoca ("Pipoca Doce com Ninho", 50, 12.50);
 
 class Kit {
     constructor(nome, quantidade, preco) {
@@ -54,3 +45,61 @@ const clienteTres = new Cliente ("Barao", 45, "Caxias do Sul", "07/04/1979", "ba
 const clienteQuatro = new Cliente ("Penelope", 38, "Caxias do Sul", "14/02/1986", "penelope@gmail.com", "(54)99999-6666", "Travessa dos Cães Nº1")
 
 const clienteCinco = new Cliente ("Carlos Eduardo", 38, "Caxias do Sul", "17/05/1986", "dudu@gmail.com", "(54)99999-6666", "Travessa dos Cães Nº2")
+
+
+//Implementação do simulador de carrinho de compras 
+//Os objetos devem entrar numa lista que será o carrinho de compras 
+//Temos que ter a opção de acrescentar mais itens e a opção de remover
+//carrinho está vazio pois pedimos ao cliente que adicione os itens que deseja 
+
+
+
+let carrinho = []; 
+let item;
+
+//está funcionando
+function adicionar() {
+    do {
+        item = parseInt(prompt("Digite o número da opção que você deseja, 1 - 2 - 3 - 4. Digite 0 para sair"));
+        if (item === 1) {
+            item = pipocaCaramelizada
+        } else if (item === 2) {
+            item = pipocaAmanteigada
+        } else if (item === 3) {
+            item = pipocaBacon
+        } else if (item === 4) {
+            item = pipocaNinho
+        }
+        carrinho.push(item)
+    } while (item !== 0);
+
+    carrinho.splice(carrinho.length - 1, 1)
+
+    for (const item of carrinho) {
+        if (item !== 0) {
+            console.log(item)
+        }
+    }
+}
+
+const total = carrinho.reduce((acumulador, valorAtual) => {
+    return acumulador += valorAtual.preco
+}, 0);
+
+console.log(total)
+
+
+//Não testei isso ainda
+// const deletar = (item) => {
+//     let index = carrinho.indexOf(item);
+    
+//     if (index !== -1) {
+//         carrinho.splice(index, 1);
+//         console.log(`O item deletado foi: ${item}`)
+//     } else {
+//         console.log("Você não havia acrescentado esse item ao seu carrinho");
+//     }
+// };
+
+// let deletarItem = prompt("Qual item você deseja excluir?")
+
